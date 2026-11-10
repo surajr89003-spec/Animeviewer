@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+**/venv/
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# User data
+favorites.json
+settings.json
+history*.json
+users*.json
+tracker*.json
+
+# Cache
+poster_cache*.json
+# Large generated model files
+anime_similarity.pkl
+anime_similarity_top*.pkl
+anime_similarity_top*.npz
