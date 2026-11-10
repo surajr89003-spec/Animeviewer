@@ -24,3 +24,5 @@ poster_cache*.json
 anime_similarity.pkl
 anime_similarity_top*.pkl
 anime_similarity_top*.npz
+anime_similarity.pkl
+*.npz
