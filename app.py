@@ -1245,10 +1245,11 @@ def because_you_liked(how_many=5):
     if not base_idx:
         return
 
-    scores = {}
+        scores = {}
     for bi in base_idx:
-        for j, score in enumerate(similarity[bi]):
+        for j, score in zip(topk_idx[bi], topk_val[bi]):
             try:
+                j = int(j)
                 scores[j] = scores.get(j, 0.0) + float(score)
             except (TypeError, ValueError):
                 continue
@@ -3489,16 +3490,24 @@ elif selected_anime:
         st.warning("Selected anime dataset mein nahi mila. Dobara search karo.")
     else:
         idx = matches[0]
+
         ranked = sorted(
-            ((i, float(score)) for i, score in enumerate(similarity[idx]) if i != idx),
+            (
+                (int(i), float(score))
+                for i, score in zip(topk_idx[idx], topk_val[idx])
+                if int(i) != idx
+            ),
             key=lambda item: item[1],
             reverse=True,
         )
+
         rec_names = [anime_df.iloc[i]["name"] for i, _score in ranked[:8]]
+
         if rec_names:
             render_grid(rec_names, 4, prefix="rec")
         else:
             st.info("Is anime ke liye recommendations available nahi hain.")
+
     page_comments(selected_anime)
 else:
     _car_slot = st.container()                   # airing slider goes here, filled after the page has loaded
